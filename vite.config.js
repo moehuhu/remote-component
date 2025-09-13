@@ -23,22 +23,6 @@ export default defineConfig({
           return assetInfo.name;
         }
       },
-      plugins: [
-        {
-          name: 'replace-process-env',
-          generateBundle(options, bundle) {
-            // 在生成的文件中替换process.env.NODE_ENV
-            for (const fileName in bundle) {
-              const chunk = bundle[fileName];
-              if (chunk.type === 'chunk') {
-                chunk.code = chunk.code.replace(/process\.env\.NODE_ENV/g, '"production"');
-                chunk.code = chunk.code.replace(/process\.env/g, '{}');
-                chunk.code = chunk.code.replace(/\bprocess\b/g, 'undefined');
-              }
-            }
-          }
-        }
-      ]
     },
   }
 })
